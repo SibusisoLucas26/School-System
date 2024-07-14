@@ -1,0 +1,22 @@
+body{
+    
+    background: linear-gradient(to right, #0f2028b2, #263e57);
+    font-variant: all-petite-caps;
+    font-size: large;
+    color: #0bb9ff;
+}
+
+.btn-primary{
+    display: ruby-base;
+    background-color: #4271a4;
+}
+
+.table{
+    color: #dfdfdf;
+    background-color: #323f4fc9;
+}
+
+.table thead th{
+    background-color: #1b2233;
+    
+}

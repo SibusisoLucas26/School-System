@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Your Profile</h1>
+    <div>
+        <p>ID: <span th:text="${teacher.id}">id</span></p>
+        <p>First Name: <span th:text="${teacher.first_name}">first name</span></p>
+        <p>Last Name: <span th:text="${teacher.last_name}">last name</span></p>
+        <p>Surname: <span th:text="${teacher.surname}">surname</span></p>
+        <p>Username: <span th:text="${teacher.username}">username</span></p>
+        <p>Password: <span th:text="${teacher.password}">password</span></p>
+        <p>Major: <span th:text="${teacher.major}">major</span></p>
+        <p>Email: <span th:text="${teacher.email}">email</span></p>
+        <!-- Add other fields as necessary -->
+    </div>
+    <a th:href="@{/teachers/profile/edit}">Edit Profile</a>
+    <a th:href="@{/teachers/dashboard}">Back to Dashboard</a>
+</body>
+</html>

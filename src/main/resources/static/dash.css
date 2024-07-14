@@ -1,0 +1,26 @@
+body{
+    
+    background: linear-gradient(to right, #b3bec4b2, #ffffff);
+   
+    font-variant: all-petite-caps;
+    font-size: large;
+    color: #147ea8;
+}
+
+.btn-primary{
+    display: ruby-base;
+    background-color: #4271a4;
+}
+
+
+.mt-5{
+    display: -ms-inline-grid;
+}
+
+.table{
+    color: #000000;
+}
+
+table{
+    color: #000;
+}

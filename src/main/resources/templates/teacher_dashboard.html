@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/dash.css}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Teacher Dashboard</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Classes</h2>
+                <h2>Your Classes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Class Name</th>
+                            <th>Grade Level</th>
+                            <th>Number of Students</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="class : ${classes}">
+                            <td th:text="${class.name}">Class Name</td>
+                            <td th:text="${class.gradeLevel}">Grade Level</td>
+                            <td th:text="${class.students.size()}">Number of Students</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h2>Assignments</h2>
+                <a th:href="@{/assignments}" class="btn btn-primary mb-3">Assignment</a>
+                <ul class="list-group">
+                    <li th:each="assignment : ${assignments}" class="list-group-item">
+                        <a th:href="@{/teachers/assignments/{id}(id=${assignment.id})}" th:text="${assignment.title}">Assignment Title</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h2>Messages</h2>
+                <ul class="list-group">
+                    <li th:each="message : ${messages}" class="list-group-item">
+                        <a th:href="@{/teachers/messages/{id}(id=${message.id})}" th:text="${message.subject}">Message Subject</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h2>Schedule</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Time</th>
+                            <th>Class</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr >
+                            <td >Monday</td>
+                            <td >10:00 AM - 11:00 AM</td>
+                            <td >Math 101</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h2>Profile</h2>
+                <a th:href="@{/teachers/profile}"class="btn btn-secondary">View Profile</a>
+                
+                <a href="/home" class="btn btn-secondary">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+
+body{
+    
+    background: linear-gradient(to right, #6c6c6c, #263e57);
+    font-variant: all-petite-caps;
+    font-size: large;
+    color: #edfaff
+}
+h1{
+    color: #0bb9ff;   
+}
+
+.form-group{
+    display: block;
+}
+
+.mb-4{
+    color: #0bb9ff;
+}

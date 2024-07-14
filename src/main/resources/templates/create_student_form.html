@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Student</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+       <link rel="stylesheet" th:href="@{/form.css}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Register Student</h1>
+        <form th:action="@{/students/reg}" th:object="${students}" method="post" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" class="form-control" id="first_name" th:field="*{firstName}" required>
+                <div class="invalid-feedback">Please provide a first name.</div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" id="last_name" th:field="*{lastName}" required>
+                <div class="invalid-feedback">Please provide a last name.</div>
+            </div>
+            <div class="form-group">
+                <label for="surname">Surname:</label>
+                <input type="text" class="form-control" id="surname" th:field="*{surname}" required>
+                <div class="invalid-feedback">Please provide a surname.</div>
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth:</label>
+                <input type="date" class="form-control" id="date_of_birth" th:field="*{date_of_birth}" required>
+                <div class="invalid-feedback">Please provide a date of birth.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="id_number">ID Number:</label>
+                <input type="text" class="form-control" id="id_number" th:field="*{id_number}" required>
+                <div class="invalid-feedback">Please provide ID number.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control" id="gender" th:field="*{gender}" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div class="invalid-feedback">Please select a gender.</div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" th:field="*{address}" required>
+                <div class="invalid-feedback">Please provide an address.</div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                <div class="invalid-feedback">Please provide a valid email.</div>
+            </div>
+            <div class="form-group">
+                <label for="parentName">Parent Name:</label>
+                <input type="text" class="form-control" id="parent_name" th:field="*{parent_name}" required>
+                <div class="invalid-feedback">Please provide a parent name.</div>
+            </div>
+            <div class="form-group">
+                <label for="parentContact">Parent Contact:</label>
+                <input type="text" class="form-control" id="parent_contact" th:field="*{parent_contact}" required>
+                <div class="invalid-feedback">Please provide a parent contact.</div>
+            </div>
+
+                        <div class="form-group">
+                <label for="subjects">Subjects:</label>
+                <select type="text" class="form-control" id="subjects" th:field="*{subjects}" required>
+                    <option value="">Select Subjects</option>
+                    <option value="12th Grade-Science">12th Grade-Science</option>
+                    <option value="12th Grade-Commerse">12th Grade-Commerse</option>
+                    <option value="12th Grade-General">12th Grade-General</option>
+                    <option value="11th Grade-Science">11th Grade-Science</option>
+                    <option value="11th Grade-Commerse">11th Grade-Commerse</option>
+                    <option value="11th Grade-General">11th Grade-General</option>
+                    <option value="10th Grade-Science">10th Grade-Science</option>
+                    <option value="10th Grade-Commerse">10th Grade-Commerse</option>
+                    <option value="10th Grade-Genera">10th Grade-General</option>
+                    <option value="9th Grade">9th Grade</option>
+                    <option value="8th Grade">8th Grade</option>
+                    <option value="7th Grade">7th Grade</option>
+                    <option value="6th Grade">6th Grade</option>
+                    <option value="5th Grade">5th Grade</option>
+                    <option value="4th Grade">4th Grade</option>
+                    <option value="3rd Grade">3rd Grade</option>
+                    <option value="2nd Grad">2nd Grade</option>
+                    <option value="1st Grade">1st Grade</option>
+                    <option value="R Grade">R Grade</option>
+                    
+                </select>
+                <div class="invalid-feedback">Please provide subjects.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Custom JS for form validation -->
+    <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
+</html>

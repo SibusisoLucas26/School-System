@@ -1,0 +1,30 @@
+/* style.css */
+.nav-link{
+    color: rgb(255, 255, 255);
+}
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #9f94ac, #263e57);
+    color: rgb(7, 5, 5);
+    
+    margin: 0;
+   
+    font-family: initial;
+    
+    height: 100vh;
+}
+
+.bg-primary{
+    background-color: #24436488
+    !important
+}
+
+.btn-primary{
+    background-color: #35456a;
+    border-color: #61747b00;
+}
+.card{
+    background-color: #53667b70;
+    color: #f7f3f3;
+    
+}

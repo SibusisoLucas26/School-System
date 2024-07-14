@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Welcome to the Admin Dashboard</h1>
+
+<a th:href="@{/students/page}" class="btn btn-primary mb-3">Manage Teachers</a>
+<a th:href="@{/teachers/page}" class="btn btn-primary mb-3">Manage Students</a>
+<!-- Admin specific features go here -->
+</body>
+</html>
