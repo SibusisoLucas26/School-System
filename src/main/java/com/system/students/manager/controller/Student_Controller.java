@@ -31,12 +31,7 @@ public class Student_Controller {
 
 ///////////////////// STUDENT CONTROLER ////////////////
 
-    @GetMapping("students/page")
-    public String listStudents(Model model) {
-        List<Students_Model> students = stu_service.getAllStudents();
-        model.addAttribute("students", students);
-        return "student_page_list";
-    }
+   
 
     
     @GetMapping("students/academic")
@@ -52,39 +47,24 @@ public class Student_Controller {
         return "redirect:/student/academic"; // Redirect to a page that lists all students
     }
 
-    @GetMapping("students/new")
-        public String new_student(Model model){
-            model.addAttribute("students", new Students_Model());
-            //stu_service.save_student(student_model);
-            return "create_student_form";        
-    }
-
+    ///////////////////////////////////////////////////////
+    
     
     @GetMapping("students/edit/{id}")
     public String editStudentForm(@PathVariable("id") Long id, Model model) {
-        Optional<Students_Model> students_Model = stu_service.find_by_idNumber(id);
+        Optional<Students_Model> students_Model = stu_service.find_by_id(id);
         model.addAttribute("student", students_Model);
         return "students/edit";
     }
 
-    @PostMapping("students/reg")
-    public String registerStudent(@ModelAttribute Students_Model students) {
-        stu_service.save_student(students);
-        // Logic to save the student
-        return "redirect:/students/page";
-    }
+    
 
     @PostMapping("students/{id}")
     public String update_students(@PathVariable("id") Long id,
      @ModelAttribute("students") Students_Model students_Model){
-        stu_service.update_student(id, students_Model);
+        stu_service.update_student(students_Model);
         return "redirect:/students_page_list";
      }
 
-     @GetMapping("students/delete/{id}")
-    public String deleteStudent(@PathVariable("id") Long id, Model model) {
-        stu_service.delete_student(id);
-        return "redirect:/students/page";
-    } 
-
+   
 }

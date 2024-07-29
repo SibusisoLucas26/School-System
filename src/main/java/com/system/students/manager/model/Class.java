@@ -23,7 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Class {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,9 +31,7 @@ public class Class {
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "school_id", nullable = false)
-    private School school;
+   
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
@@ -45,12 +43,12 @@ public class Class {
     @OneToMany(mappedBy = "clazz", cascade = CascadeType.ALL)
     private List<ScheduleSlot> schedule;
 
-    public Class(Long id, String name, School school, Teacher_model teacher) {
+    public Class(Long id, String name, Teacher_model teacher) {
         this.id = id;
         this.name = name;
-        this.school = school;
+       
         this.teacher = teacher;
     }
 
-    
+
 }

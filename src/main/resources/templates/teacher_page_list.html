@@ -20,7 +20,6 @@
                     <th>Surname</th>
                     <th>Username</th>
                     <th>Class</th>
-                    
                     <th>Email</th>
                     <th>Actions</th>
                 </tr>
@@ -36,7 +35,9 @@
                     <td th:text="${teachers.email}"></td>
                     <td>
                         
-                        <a th:href="@{/teachers/admin/edit}" class="btn btn-warning">Edit</a>
+                        
+                        <a th:href="@{/admin/teachers/edit/{id}(id=${teachers.id})}" class="btn btn-warning">Edit Teacher</a>
+
                         <a th:href="@{/teachers/delete/{id}(id=${teachers.id})}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>

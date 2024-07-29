@@ -23,13 +23,13 @@ public class Assignment_Controller {
     @Autowired
     private Assigment_services assigment_services;
 
-    @GetMapping("/assignments")
+   // @GetMapping("/teachers/dashboard")
     //checked
-    public String getAllAssignments(Model model) {
-        List<StudentAssignment> assignments = assigment_services.getAllAssignments();
-        model.addAttribute("assignments", assignments);
-        return "assignments_index";
-    }
+  //  public String getAllAssignments(Model model) {
+  //      List<StudentAssignment> assignments = assigment_services.getAllAssignments();
+   ///     model.addAttribute("assignment", assignments);
+   //     return "teacher_dashboard";
+   // }
 
     //checked
     @GetMapping("assignments/new")
@@ -58,14 +58,14 @@ public class Assignment_Controller {
     @GetMapping("/assignments/delete/{id}")
     public String deleteAssignment(@PathVariable Long id) {
         assigment_services.deleteAssignment(id);
-        return "redirect:/assignments";
+        return "redirect:/user/dashboard";
     }
 
     //checked
     @PostMapping("/assignments/post")
     public String createAssignment(@ModelAttribute StudentAssignment assignment) {
          assigment_services.saveAssignment(assignment);
-         return "redirect:/assignments";
+         return "redirect:/user/dashboard";
     }
 
     /////////////////////////////////////////////

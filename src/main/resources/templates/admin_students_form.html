@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Form</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1 >Add New Student</h1>
+    <form th:action="@{/admin/student/edit'}" th:object="${student}"  method="post">
+        <input type="text" th:field="*{first_name}" placeholder="First Name" required />
+        <input type="text" th:field="*{last_name}" placeholder="Last Name" required />
+        <input type="text" th:field="*{username}" placeholder="Username" required />
+        
+        <!-- Add other fields as necessary -->
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

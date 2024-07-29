@@ -2,19 +2,19 @@ package com.system.students.manager.teacher_services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.system.students.manager.model.Teacher_model;
 import com.system.students.manager.repository.Class_repo;
 import com.system.students.manager.repository.Teacher_repo;
 
 @Service
-public class Teacher_impl_service implements Teacher_services, UserDetailsService {
+public class Teacher_impl_service implements Teacher_services {
     
     @Autowired
     private Class_repo class_repo;
@@ -26,14 +26,18 @@ public class Teacher_impl_service implements Teacher_services, UserDetailsServic
     ////////////////////////////////////////////
     @Autowired
     private Teacher_repo teacher_repo;
-    
 
-    @Override
-    public Teacher_model save_teacher(Teacher_model teacher_model) {
-        // TODO Auto-generated method stub
-        return teacher_repo.save(teacher_model);
-       // throw new UnsupportedOperationException("Unimplemented method 'save_teacher'");
-    }
+  /////////////////////////////////////////////////////////////  
+
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+
+  @Transactional
+  public void createUser(String username, String password, Set<String> roles) {
+     Teacher_model teacher_model = new Teacher_model(username, passwordEncoder.encode(password), roles);
+     teacher_repo.save(teacher_model);
+  }
+  //////////////////////////////////////////////////
 
     @Override
     public List<Teacher_model> getAllTeachers() {
@@ -61,17 +65,21 @@ public class Teacher_impl_service implements Teacher_services, UserDetailsServic
    
     /////////////////// security implimentstion
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Teacher_model teacher_model = teacher_repo.findByUsername(username);
-        if (teacher_model == null){
-            throw new UsernameNotFoundException("User not founf" + username);
-        }
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(teacher_model.getUsername())
-                .password(teacher_model.getPassword())
-                .build();
-    }
+
+  ///  @Override
+  //  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+  //      Teacher_model teacher_model = teacher_repo.findByUsername(username);
+  //      if (teacher_model == null){
+  //          throw new UsernameNotFoundException("User not founf" + username);
+  //      }
+  //      return org.springframework.security.core.userdetails.User.builder()
+  //              .username(teacher_model.getUsername())
+  //              .password(teacher_model.getPassword())
+  //              .build();
+  //  }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
     //////////////////////////////////
 
     @Override
@@ -82,11 +90,10 @@ public class Teacher_impl_service implements Teacher_services, UserDetailsServic
       if(teacher_Optional.isPresent()){
         Teacher_model teacher = teacher_Optional.get();
         teacher.setId(teacher_model.getId());
-        teacher.setFirst_name(teacher_model.getFirst_name());
-        teacher.setLast_name(teacher_model.getLast_name());
+       
         teacher.setUsername(teacher_model.getUsername());
         teacher.setPassword(teacher_model.getPassword());
-        teacher.setEmail(teacher_model.getEmail());
+       
         //teacher.setPhone(teacher_model.getPhone());
 
 		return teacher_repo.save(teacher_model);
@@ -98,7 +105,15 @@ public class Teacher_impl_service implements Teacher_services, UserDetailsServic
     @Override
     public Optional<Teacher_model> get_byId(Long id) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get_byId'");
+        return teacher_repo.findById(id);
+        //throw new UnsupportedOperationException("Unimplemented method 'get_byId'");
+    }
+
+    @Override
+    public Optional<Teacher_model> findByTeacherId(Long id) {
+        // TODO Auto-generated method stub
+        return teacher_repo.findById(id);
+        //throw new UnsupportedOperationException("Unimplemented method 'findByTeacherId'");
     }
  
 

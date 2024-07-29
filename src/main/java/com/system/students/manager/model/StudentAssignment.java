@@ -1,6 +1,5 @@
 package com.system.students.manager.model;
 
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;

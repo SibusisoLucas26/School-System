@@ -1,26 +1,28 @@
+.navbar-light .navbar-brand {
+    color: rgb(219, 222, 255);
+  }
 body{
-    
-    background: linear-gradient(to right, #b3bec4b2, #ffffff);
-   
-    font-variant: all-petite-caps;
-    font-size: large;
-    color: #147ea8;
+    background-color: #1a2931;
+}  
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.59);
+} 
+
+.card{
+    color: #5e8282;
+    background-color: #264d59;
 }
 
-.btn-primary{
-    display: ruby-base;
-    background-color: #4271a4;
-}
+  h1{
+    color: #d7dcfa;
+  }
 
-
-.mt-5{
-    display: -ms-inline-grid;
-}
-
-.table{
-    color: #000000;
-}
-
-table{
-    color: #000;
+  .btn-primary {
+    color: #e2dbdb;
+    background-color: #037766b9;
+    border-color: #00f3ff5c;
+  } 
+  p {
+    color: #d7dcfa;
 }

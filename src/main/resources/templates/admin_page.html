@@ -1,15 +1,134 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>School Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/dash.css}">
+    
 </head>
 <body>
-<h1>Welcome to the Admin Dashboard</h1>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">School Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/page">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/teachers">Teachers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/classes">Classes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/schedule">Schedule</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/reports">Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/settings">Settings</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<a th:href="@{/students/page}" class="btn btn-primary mb-3">Manage Teachers</a>
-<a th:href="@{/teachers/page}" class="btn btn-primary mb-3">Manage Students</a>
-<!-- Admin specific features go here -->
+    <!-- Hero Section -->
+    <section class="hero text-center py-5">
+        <div class="container">
+            <h1>Administration Management Dashboard</h1>
+            <p class="lead">Manage students, teachers, classes, and schedules efficiently.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-user-graduate fa-3x mb-3"></i>
+                            <h5 class="card-title">Student Management</h5>
+                            <p class="card-text">Add, edit, and manage student information.</p>
+                            <a th:href="@{/students/page}" class="btn btn-primary">Manage Students</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chalkboard-teacher fa-3x mb-3"></i>
+                            <h5 class="card-title">Teacher Management</h5>
+                            <p class="card-text">Add, edit, and manage teacher information.</p>
+                            <a th:href="@{/teachers/page}" class="btn btn-primary">Manage Teachers</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-calendar-alt fa-3x mb-3"></i>
+                            <h5 class="card-title">Schedule Management</h5>
+                            <p class="card-text">Organize and manage class schedules.</p>
+                            <a th:href="@{/schedule}" class="btn btn-primary">Manage Schedules</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-book-open fa-3x mb-3"></i>
+                            <h5 class="card-title">Class Management</h5>
+                            <p class="card-text">Add, edit, and manage class information.</p>
+                            <a th:href="@{/classes}" class="btn btn-primary">Manage Classes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-file-alt fa-3x mb-3"></i>
+                            <h5 class="card-title">Reports</h5>
+                            <p class="card-text">View and generate reports.</p>
+                            <a th:href="@{/reports}" class="btn btn-primary">View Reports</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-cogs fa-3x mb-3"></i>
+                            <h5 class="card-title">Settings</h5>
+                            <p class="card-text">Configure system settings.</p>
+                            <a th:href="@{/settings}" class="btn btn-primary">Manage Settings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center py-4">
+        <div class="container">
+            <p>&copy; 2024 Universal Group Corp. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+

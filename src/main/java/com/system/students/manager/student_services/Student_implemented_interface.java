@@ -22,17 +22,17 @@ public class Student_implemented_interface implements Student_service {
     }
 
     @Override
-    public Optional<Students_Model> find_by_idNumber(long id_number) {
+    public Optional<Students_Model> find_by_id(long id) {
         // TODO Auto-generated method stub
-        return student_repo.findById(id_number);
+        return student_repo.findById(id);
        
     }
     
 
     @Override
-    public Students_Model update_student(Long id, Students_Model students_Model) {
+    public Students_Model update_student(Students_Model students_Model) {
         // TODO Auto-generated method stub
-        students_Model.setId(id);
+      //  students_Model.setId(id);
        return student_repo.save(students_Model);
        // throw new UnsupportedOperationException("Unimplemented method 'edit_student'");
     }

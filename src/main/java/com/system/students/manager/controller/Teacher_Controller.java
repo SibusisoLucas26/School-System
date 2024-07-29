@@ -4,24 +4,20 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.web.exchanges.HttpExchange.Principal;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.system.students.manager.model.StudentAssignment;
 import com.system.students.manager.model.Teacher_model;
 import com.system.students.manager.repository.Teacher_repo;
-import com.system.students.manager.security.Password_Coder;
-import com.system.students.manager.teacher_services.Teacher_services;
 
-import jakarta.validation.Valid;
+import com.system.students.manager.teacher_services.Teacher_services;
 
 @Controller
 public class Teacher_Controller {
@@ -29,33 +25,21 @@ public class Teacher_Controller {
     @Autowired
     private Teacher_services teacher_services;
 
+  
     @Autowired
-    private Password_Coder password_Coder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private Teacher_repo teacher_repo;
 
-    ////////////////////// DASH BOARD CONTROLLER////////////////////////
-   @GetMapping("/admin/dashboard")
-    public String adminPage() {
-        return "admin_page";
-    }
-    
-    @GetMapping("/teachers/dashboard")
-    public String dashboard(Model model, Principal principal) {
-        String username = principal.getName();
-        Teacher_model teacher_model = teacher_repo.findByUsername(username);
-        model.addAttribute("teacher", teacher_model) ;
-        return "teacher_dashboard";
-    }
 
 /////////////////////////TEACHER CONTROLLER/////////////////////////////////////////
 
-    //checked
+    //checked 
     @PostMapping("/teachers/reg")
     public String saveTeacher(@ModelAttribute("teachers") Teacher_model teacher, Model model) {
-        teacher.setPassword(password_Coder.encode(teacher.getPassword()));
-        teacher_services.save_teacher(teacher);
+        teacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
+        teacher_repo.save(teacher);
         return "redirect:/teachers/page";
     }
 
@@ -67,24 +51,8 @@ public class Teacher_Controller {
         return "teacher_page_list";
     }
 
-///////////// teachers Dashboard logout & login ///////////////////////////
-
-    //checked
-    @GetMapping("/teachers/login")
-    public String showLoginPage(Model model) {
-        model.addAttribute("teachers", new Teacher_model());
-        return "Teacher_Login-Page";
-    }
-    
-    //checked
-    @GetMapping("/logout")
-    public String logout() {
-        // Add code to invalidate session or clear authentication
-        return "redirect:/home";
-    }
-
    
-///////////////////// teacher profile controllers////////////////////////////////////////////////////////////
+///////////////////// teacher profile controllers//////////////////////////////////////////////////
 
     @GetMapping("/teachers/profile")
     public String viewProfile(Model model) {
@@ -95,6 +63,7 @@ public class Teacher_Controller {
         return "teacher_profile";
     }
 
+    /// teachers profile edit controllers POST & GETMAPPING
     @GetMapping("/teachers/profile/edit")
     public String editProfile(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -104,15 +73,13 @@ public class Teacher_Controller {
         return "teacher_edit";
     }
 
+    //checked  fix duplicate save
     @PostMapping("/teachers/profile/edit")
-    public String updateProfile(@Valid @ModelAttribute("teacher") Teacher_model teacher, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "teacher_profile_edit";
-        }
-        teacher_services.update_teacher(teacher);
-        return "redirect:/teachers/profile";
+    public String editTeacherForm( @ModelAttribute("teacher") Teacher_model teacher_model) {
+                teacher_repo.save(teacher_model);
+        return "redirect:/teachers/dashboard";
     }
-    
+     
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -133,15 +100,10 @@ public class Teacher_Controller {
        return "create_teacher_form";
     }
 
-    //checked  fix duplicate save
-   // @PostMapping("/teachers/edit/{id}")
-    public String editTeacherForm(@PathVariable Long id, @ModelAttribute("teacher") Teacher_model teacher_model) {
-        teacher_model.setId(id);
-        teacher_services.save_teacher(teacher_model);
-        return "redirect:/dashboard";
-    }
+    
 /////////////////////////////////////////////////////////////////////////////////////
    
+    //checked
     @GetMapping("teachers/delete/{id}")
     public String deleteTeacher(@PathVariable("id") Long id, Model model) {
        teacher_services.delete_teacher(id);

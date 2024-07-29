@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="assignment : ${assignments}">
+        <tr th:each="assignment : ${assign}">
             <td th:text="${assignment.id}"></td>
             <td th:text="${assignment.title}"></td>
             <td th:text="${assignment.description}"></td>

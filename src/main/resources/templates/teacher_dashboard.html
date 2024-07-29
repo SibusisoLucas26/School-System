@@ -5,15 +5,15 @@
     <title>Teacher Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/dash.css}">
+
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Teacher Dashboard</h1>
         <div class="row">
-            <div class="col-md-4">
-                <h2>Classes</h2>
+            <div class="col-md-6">
                 <h2>Your Classes</h2>
-                <table>
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Class Name</th>
@@ -27,28 +27,65 @@
                             <td th:text="${class.gradeLevel}">Grade Level</td>
                             <td th:text="${class.students.size()}">Number of Students</td>
                         </tr>
+                        <!-- Placeholder data -->
+                        <tr>
+                            <td>Math 101</td>
+                            <td>Grade 9</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>Science 202</td>
+                            <td>Grade 10</td>
+                            <td>25</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h2>Assignments</h2>
-                <a th:href="@{/assignments}" class="btn btn-primary mb-3">Assignment</a>
-                <ul class="list-group">
-                    <li th:each="assignment : ${assignments}" class="list-group-item">
-                        <a th:href="@{/teachers/assignments/{id}(id=${assignment.id})}" th:text="${assignment.title}">Assignment Title</a>
-                    </li>
-                </ul>
+                <a th:href="@{/assignments/new}" class="btn btn-primary mb-3">Create Assignment</a>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Due Date</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="assignment : ${assignments}">
+                        <td th:text="${assignment.title}">Title</td>
+                        <td th:text="${assignment.description}">Description</td>
+                        <td th:text="${assignment.dueDate}">Due Date</td>
+                        <td>
+                            <a th:href="@{/assignments/edit/{id}(id=${assignment.id})}" class="btn btn-primary">Edit</a>
+                            <a th:href="@{/assignments/delete/{id}(id=${assignment.id})}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    <!-- Placeholder data -->
+                    
+                   
+                    </tbody>
+                </table>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6">
                 <h2>Messages</h2>
                 <ul class="list-group">
                     <li th:each="message : ${messages}" class="list-group-item">
                         <a th:href="@{/teachers/messages/{id}(id=${message.id})}" th:text="${message.subject}">Message Subject</a>
                     </li>
+                    <!-- Placeholder data -->
+                    <li class="list-group-item">
+                        <a href="#">Parent Meeting</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">Staff Meeting Reminder</a>
+                    </li>
                 </ul>
             </div>
-        </div>
-        <div class="row mt-5">
             <div class="col-md-6">
                 <h2>Schedule</h2>
                 <table class="table table-bordered">
@@ -60,21 +97,49 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr >
-                            <td >Monday</td>
-                            <td >10:00 AM - 11:00 AM</td>
-                            <td >Math 101</td>
+                        <!-- Placeholder data for Monday to Friday -->
+                        <tr>
+                            <td>Monday</td>
+                            <td>10:00 AM - 11:00 AM</td>
+                            <td>Math 101</td>
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>11:00 AM - 12:00 PM</td>
+                            <td>Science 202</td>
+                        </tr>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td>09:00 AM - 10:00 AM</td>
+                            <td>Math 101</td>
+                        </tr>
+                        <tr>
+                            <td>Thursday</td>
+                            <td>10:00 AM - 11:00 AM</td>
+                            <td>Science 202</td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td>11:00 AM - 12:00 PM</td>
+                            <td>Math 101</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-6">
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12">
                 <h2>Profile</h2>
-                <a th:href="@{/teachers/profile}"class="btn btn-secondary">View Profile</a>
+                <div class="foot">
+                <a th:href="@{/teachers/profile}" class="btn btn-secondary mb-3">View Profile</a>
+                <a href="/home" class="btn btn-secondary">Logout</a>    
+                </div>
                 
-                <a href="/home" class="btn btn-secondary">Logout</a>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
