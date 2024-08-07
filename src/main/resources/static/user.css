@@ -1,0 +1,39 @@
+.nav-link {
+  color: #bcd9ff;
+}
+
+.navbar-light .navbar-brand {
+
+  color: rgb(71, 118, 179);
+}
+
+body {
+  background-color: #001a40d6;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(20, 18, 18);
+}
+
+.card {
+  color: #5e8282;
+  background-color: #264d59;
+}
+
+h1 {
+  color: #d7dcfa;
+}
+
+.btn-primary {
+  color: #e2dbdb;
+  background-color: #037766b9;
+  border-color: #00f3ff5c;
+}
+
+p {
+  color: #000000;
+}
+
+.bg-light {
+  background-color: #eee !important;
+}

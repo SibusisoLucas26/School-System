@@ -13,9 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Entity
@@ -25,200 +23,196 @@ import lombok.ToString;
 @ToString
 public class Students_Model {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+  @Column(name = "first_name", nullable = false)
+  private String firstName;
 
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+  @Column(name = "last_name", nullable = false)
+  private String lastName;
 
-    @Column(name = "surname", nullable = false)
-    private String surname;
+  @Column(name = "surname", nullable = false)
+  private String surname;
 
-    @Column(name = "date_of_birth", nullable = false)
-    private String date_of_birth;
+  @Column(name = "date_of_birth", nullable = false)
+  private String date_of_birth;
 
-    @Column(name = "gender", nullable = false)
-    private String gender;
+  @Column(name = "gender", nullable = false)
+  private String gender;
 
-    @Column(name = "address", nullable = false)
-    private String address;
+  @Column(name = "address", nullable = false)
+  private String address;
 
-    @Column(name = "id_number", nullable = false)
-    private long id_number;
-    
-    @Column(name = "email", nullable = false)
-    private String email;
+  @Column(name = "id_number", nullable = false)
+  private String id_number;
 
-    @Column(name = "parent_name", nullable = false)
-    private String parent_name;
+  @Column(name = "email", nullable = false)
+  private String email;
 
-    @Column(name = "parent_contact", nullable = false)
-    private long parent_contact;
+  @Column(name = "parent_name", nullable = false)
+  private String parent_name;
 
-          
-      // relationship
+  @Column(name = "parent_contact", nullable = false)
+  private String parent_contact;
 
-      ////////// mapped to school
-      
-      /////////////////////////////////////
+  // relationship
 
-     @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Class clazz;
+  ////////// mapped to school
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<StudentAssignment> studentAssignments;
+  /////////////////////////////////////
 
-    @OneToMany(mappedBy = "student")
-    private List<AssignmentSubmission> submissions;
-  
-      @Column(name = "subjects")
-      private String subjects;
+  @ManyToOne
+  @JoinColumn(name = "class_id")
+  private Class clazz;
 
-    public Students_Model(long id, String firstName, String lastName, String surname, String date_of_birth,
-            String gender, String address, long id_number, String email, String parent_name, long parent_contact,
-            String subjects) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.surname = surname;
-        this.date_of_birth = date_of_birth;
-        this.gender = gender;
-        this.address = address;
-        this.id_number = id_number;
-        this.email = email;
-        this.parent_name = parent_name;
-        this.parent_contact = parent_contact;
-        this.subjects = subjects;
-    }
+  @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+  private List<StudentAssignment> studentAssignments;
 
-    public long getId() {
-      return id;
-    }
+  @OneToMany(mappedBy = "student")
+  private List<AssignmentSubmission> submissions;
 
-    public void setId(long id) {
-      this.id = id;
-    }
+  @Column(name = "subjects")
+  private String subjects;
 
-    public String getFirstName() {
-      return firstName;
-    }
+  public Students_Model(long id, String firstName, String lastName, String surname, String date_of_birth,
+      String gender, String address, String id_number, String email, String parent_name, String parent_contact,
+      String subjects) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.surname = surname;
+    this.date_of_birth = date_of_birth;
+    this.gender = gender;
+    this.address = address;
+    this.id_number = id_number;
+    this.email = email;
+    this.parent_name = parent_name;
+    this.parent_contact = parent_contact;
+    this.subjects = subjects;
+  }
 
-    public void setFirstName(String firstName) {
-      this.firstName = firstName;
-    }
+  public long getId() {
+    return id;
+  }
 
-    public String getLastName() {
-      return lastName;
-    }
+  public void setId(long id) {
+    this.id = id;
+  }
 
-    public void setLastName(String lastName) {
-      this.lastName = lastName;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public String getSurname() {
-      return surname;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public void setSurname(String surname) {
-      this.surname = surname;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public String getDate_of_birth() {
-      return date_of_birth;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    public void setDate_of_birth(String date_of_birth) {
-      this.date_of_birth = date_of_birth;
-    }
+  public String getSurname() {
+    return surname;
+  }
 
-    public String getGender() {
-      return gender;
-    }
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
 
-    public void setGender(String gender) {
-      this.gender = gender;
-    }
+  public String getDate_of_birth() {
+    return date_of_birth;
+  }
 
-    public String getAddress() {
-      return address;
-    }
+  public void setDate_of_birth(String date_of_birth) {
+    this.date_of_birth = date_of_birth;
+  }
 
-    public void setAddress(String address) {
-      this.address = address;
-    }
+  public String getGender() {
+    return gender;
+  }
 
-    public long getId_number() {
-      return id_number;
-    }
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
 
-    public void setId_number(long id_number) {
-      this.id_number = id_number;
-    }
+  public String getAddress() {
+    return address;
+  }
 
-    public String getEmail() {
-      return email;
-    }
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
-    public void setEmail(String email) {
-      this.email = email;
-    }
+  public String getId_number() {
+    return id_number;
+  }
 
-    public String getParent_name() {
-      return parent_name;
-    }
+  public void setId_number(String id_number) {
+    this.id_number = id_number;
+  }
 
-    public void setParent_name(String parent_name) {
-      this.parent_name = parent_name;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public long getParent_contact() {
-      return parent_contact;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setParent_contact(long parent_contact) {
-      this.parent_contact = parent_contact;
-    }
+  public String getParent_name() {
+    return parent_name;
+  }
 
-    public Class getClazz() {
-      return clazz;
-    }
+  public void setParent_name(String parent_name) {
+    this.parent_name = parent_name;
+  }
 
-    public void setClazz(Class clazz) {
-      this.clazz = clazz;
-    }
+  public String getParent_contact() {
+    return parent_contact;
+  }
 
-    public List<StudentAssignment> getStudentAssignments() {
-      return studentAssignments;
-    }
+  public void setParent_contact(String parent_contact) {
+    this.parent_contact = parent_contact;
+  }
 
-    public void setStudentAssignments(List<StudentAssignment> studentAssignments) {
-      this.studentAssignments = studentAssignments;
-    }
+  public Class getClazz() {
+    return clazz;
+  }
 
-    public List<AssignmentSubmission> getSubmissions() {
-      return submissions;
-    }
+  public void setClazz(Class clazz) {
+    this.clazz = clazz;
+  }
 
-    public void setSubmissions(List<AssignmentSubmission> submissions) {
-      this.submissions = submissions;
-    }
+  public List<StudentAssignment> getStudentAssignments() {
+    return studentAssignments;
+  }
 
-    public String getSubjects() {
-      return subjects;
-    }
+  public void setStudentAssignments(List<StudentAssignment> studentAssignments) {
+    this.studentAssignments = studentAssignments;
+  }
 
-    public void setSubjects(String subjects) {
-      this.subjects = subjects;
-    }
+  public List<AssignmentSubmission> getSubmissions() {
+    return submissions;
+  }
 
-    
+  public void setSubmissions(List<AssignmentSubmission> submissions) {
+    this.submissions = submissions;
+  }
 
-      ///////
-      
+  public String getSubjects() {
+    return subjects;
+  }
+
+  public void setSubjects(String subjects) {
+    this.subjects = subjects;
+  }
+
+
 
 }

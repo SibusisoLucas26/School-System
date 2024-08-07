@@ -1,16 +1,18 @@
 package com.system.students.manager.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.FetchType;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Teacher_model implements UserDetails {
@@ -18,26 +20,61 @@ public class Teacher_model implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    private String firstname;
+    private String lastname;
+    private String surname;
     private String username;
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles = new HashSet<>();
 
-    public Teacher_model() {}
+    public Teacher_model() {
+    }
 
-    public Teacher_model(String username, String password, Set<String> roles) {
+    public Teacher_model(String firstname, String lastname, String surname, String username, String password,
+            Set<String> roles) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.surname = surname;
         this.username = username;
         this.password = password;
         this.roles = roles;
     }
 
-    public Teacher_model(Long id, String username, String password, Set<String> roles) {
+    public Teacher_model(Long id, String firstname, String lastname, String surname, String username, String password,
+            Set<String> roles) {
         this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.surname = surname;
         this.username = username;
         this.password = password;
         this.roles = roles;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     @Override
@@ -97,8 +134,8 @@ public class Teacher_model implements UserDetails {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", roles=" + roles + "]";
+        return "Teacher_model [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", surname="
+                + surname + ", username=" + username + ", password=" + password + ", roles=" + roles + "]";
     }
 
-   
 }

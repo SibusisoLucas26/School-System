@@ -10,7 +10,7 @@
     <div class="container mt-5">
         <h1 class="mb-4">Teachers</h1>
         <a th:href="@{/teachers/new}" class="btn btn-primary mb-4">Add New Teacher</a>
-        <a th:href="@{/home}" class="btn btn-primary mb-4">Back to Home</a>
+        <a th:href="@{/admin/dashboard}" class="btn btn-primary mb-4">Back to Home</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -19,26 +19,26 @@
                     <th>Last Name</th>
                     <th>Surname</th>
                     <th>Username</th>
-                    <th>Class</th>
-                    <th>Email</th>
+                    <th>Password</th>
+                    
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="teachers : ${teachers}">
                     <td th:text="${teachers.id}">1</td>
-                    <td th:text="${teachers.first_name}"></td>
-                    <td th:text="${teachers.last_name}"></td>
+                    <td th:text="${teachers.firstname}"></td>
+                    <td th:text="${teachers.lastname}"></td>
                     <td th:text="${teachers.surname}"></td>
                     <td th:text="${teachers.username}"></td>
-                    <td th:text="${teachers.major}"></td>
-                    <td th:text="${teachers.email}"></td>
+                    <td th:text="${teachers.Password}"></td>
+                    
                     <td>
                         
                         
                         <a th:href="@{/admin/teachers/edit/{id}(id=${teachers.id})}" class="btn btn-warning">Edit Teacher</a>
 
-                        <a th:href="@{/teachers/delete/{id}(id=${teachers.id})}" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/admin/teachers/delete/{id}(id=${teachers.id})}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </tbody>

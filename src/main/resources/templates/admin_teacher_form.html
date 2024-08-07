@@ -17,12 +17,12 @@
 
         <div class="form-group">
             <label for="first_name">First Name</label>
-            <input type="text" th:field="*{first_name}" class="form-control" id="first_name" required>
+            <input type="text" th:field="*{firstname}" class="form-control" id="firstname" required>
         </div>
 
         <div class="form-group">
             <label for="last_name">last_name</label>
-            <input type="text" th:field="*{last_name}" class="form-control" id="last_name" required></input>
+            <input type="text" th:field="*{lastname}" class="form-control" id="lastname" required></input>
         </div>
 
         <div class="form-group">
@@ -40,15 +40,7 @@
             <input type="text" th:field="*{password}" class="form-control" id="password" required>
         </div>
 
-        <div class="form-group">
-            <label for="major">Major</label>
-            <input type="text" th:field="*{major}" class="form-control" id="major" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">E-Mail</label>
-            <input type="text" th:field="*{email}" class="form-control" id="email" required>
-        </div>
+       
 
         <button type="submit" class="btn btn-primary">Update</button>
     </form>

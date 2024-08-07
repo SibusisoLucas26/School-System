@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Teacher Form</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-    <h1 >Add New Student</h1>
-    <form th:action="@{/admin/student/edit'}" th:object="${student}"  method="post">
-        <input type="text" th:field="*{first_name}" placeholder="First Name" required />
-        <input type="text" th:field="*{last_name}" placeholder="Last Name" required />
-        <input type="text" th:field="*{username}" placeholder="Username" required />
-        
+    <h1>Add New Student</h1>
+    <form th:action="@{/admin/students/edit}" th:object="${students}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <input type="text" th:field="*{firstName}" placeholder="First Name" required />
+        <input type="text" th:field="*{lastName}" placeholder="Last Name" required />
+        <input type="text" th:field="*{surname}" placeholder="Srrname" required />
+        <input type="text" th:field="*{date_of_birth}" placeholder="date_of_birth" required />
+        <input type="text" th:field="*{gender}" placeholder="gander" required />
+        <input type="text" th:field="*{address}" placeholder="address" required />
+        <input type="text" th:field="*{id_number}" placeholder="id_number" required />
+        <input type="text" th:field="*{email}" placeholder="Email" required />
+        <input type="text" th:field="*{parent_name}" placeholder="guardian name" required />
+        <input type="text" th:field="*{parent_contact}" placeholder="guadian contacts" required />
+
         <!-- Add other fields as necessary -->
         <button type="submit">Save</button>
     </form>
 </body>
+
 </html>

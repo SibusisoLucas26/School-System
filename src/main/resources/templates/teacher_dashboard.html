@@ -1,14 +1,99 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Teacher Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/dash.css}">
+    <link rel="stylesheet" th:href="@{/user.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
+        .navbar {
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .hero {
+            background-color: #1877f2;
+            color: white;
+            border-radius: 10px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #1877f2;
+            border-color: #1877f2;
+        }
+
+        .list-group-item {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .list-group-item a {
+            color: #1877f2;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            color: #3d74ac;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Teacher Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/teachers/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5 p-4">
         <h1 class="mb-4">Teacher Dashboard</h1>
         <div class="row">
             <div class="col-md-6">
@@ -46,26 +131,26 @@
                 <a th:href="@{/assignments/new}" class="btn btn-primary mb-3">Create Assignment</a>
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Due Date</th>
-                        <th>Actions</th>
-                    </tr>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Due Date</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="assignment : ${assignments}">
-                        <td th:text="${assignment.title}">Title</td>
-                        <td th:text="${assignment.description}">Description</td>
-                        <td th:text="${assignment.dueDate}">Due Date</td>
-                        <td>
-                            <a th:href="@{/assignments/edit/{id}(id=${assignment.id})}" class="btn btn-primary">Edit</a>
-                            <a th:href="@{/assignments/delete/{id}(id=${assignment.id})}" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                    <!-- Placeholder data -->
-                    
-                   
+                        <tr th:each="assignment : ${assignments}">
+                            <td th:text="${assignment.title}">Title</td>
+                            <td th:text="${assignment.description}">Description</td>
+                            <td th:text="${assignment.dueDate}">Due Date</td>
+                            <td>
+                                <a th:href="@{/assignments/edit/{id}(id=${assignment.id})}"
+                                    class="btn btn-primary">Edit</a>
+                                <a th:href="@{/assignments/delete/{id}(id=${assignment.id})}"
+                                    class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <!-- Placeholder data -->
                     </tbody>
                 </table>
             </div>
@@ -75,7 +160,8 @@
                 <h2>Messages</h2>
                 <ul class="list-group">
                     <li th:each="message : ${messages}" class="list-group-item">
-                        <a th:href="@{/teachers/messages/{id}(id=${message.id})}" th:text="${message.subject}">Message Subject</a>
+                        <a th:href="@{/teachers/messages/{id}(id=${message.id})}" th:text="${message.subject}">Message
+                            Subject</a>
                     </li>
                     <!-- Placeholder data -->
                     <li class="list-group-item">
@@ -127,19 +213,14 @@
                 </table>
             </div>
         </div>
-        <div class="row mt-5">
-            <div class="col-md-12">
-                <h2>Profile</h2>
-                <div class="foot">
-                <a th:href="@{/teachers/profile}" class="btn btn-secondary mb-3">View Profile</a>
-                <a href="/home" class="btn btn-secondary">Logout</a>    
-                </div>
-                
-            </div>
-        </div>
+
     </div>
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

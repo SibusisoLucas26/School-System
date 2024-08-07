@@ -14,6 +14,7 @@ public interface Teacher_services {
 	Optional <Teacher_model> get_byId(Long id);
     Teacher_model findByUsername(String username);
     Optional<Teacher_model> findByTeacherId(Long id);
+    Teacher_model save(Teacher_model teacher_model);
 
 
 }

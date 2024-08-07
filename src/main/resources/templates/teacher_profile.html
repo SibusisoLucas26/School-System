@@ -1,25 +1,89 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Arial', sans-serif;
+        }
+        .profile-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .profile-content p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .profile-content span {
+            font-weight: bold;
+            color: #555;
+        }
+        .profile-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .profile-actions a {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Your Profile</h1>
-    <div>
-        <p>ID: <span th:text="${teacher.id}">id</span></p>
-        <p>First Name: <span th:text="${teacher.first_name}">first name</span></p>
-        <p>Last Name: <span th:text="${teacher.last_name}">last name</span></p>
-        <p>Surname: <span th:text="${teacher.surname}">surname</span></p>
-        <p>Username: <span th:text="${teacher.username}">username</span></p>
-        <p>Password: <span th:text="${teacher.password}">password</span></p>
-        <p>Major: <span th:text="${teacher.major}">major</span></p>
-        <p>Email: <span th:text="${teacher.email}">email</span></p>
-        <!-- Add other fields as necessary -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Your Profile</h1>
+        </div>
+        <div class="profile-content">
+
+             <p><span>First Name:</span> <span th:text="${teacher.firstname}">first name</span></p>
+             <p><span>Last Name:</span> <span th:text="${teacher.lastname}">last name</span></p>
+             <p><span>Surname:</span> <span th:text="${teacher.surname}">surname</span></p>
+            <p><span>Username:</span> <span th:text="${teacher.username}">username</span></p>
+            
+           
+            <!-- Add other fields as necessary -->
+        </div>
+        <div class="profile-actions">
+            <a th:href="@{/teachers/profile/edit}" class="btn btn-primary">Edit Profile</a>
+            <a th:href="@{/user/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
     </div>
-    <a th:href="@{/teachers/profile/edit}">Edit Profile</a>
-    <a th:href="@{/teachers/dashboard}">Back to Dashboard</a>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>
+
+
