@@ -15,7 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Teacher_model implements UserDetails {
+public class User_Model implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,10 +29,10 @@ public class Teacher_model implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles = new HashSet<>();
 
-    public Teacher_model() {
+    public User_Model() {
     }
 
-    public Teacher_model(String firstname, String lastname, String surname, String username, String password,
+    public User_Model(String firstname, String lastname, String surname, String username, String password,
             Set<String> roles) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -42,7 +42,7 @@ public class Teacher_model implements UserDetails {
         this.roles = roles;
     }
 
-    public Teacher_model(Long id, String firstname, String lastname, String surname, String username, String password,
+    public User_Model(Long id, String firstname, String lastname, String surname, String username, String password,
             Set<String> roles) {
         this.id = id;
         this.firstname = firstname;

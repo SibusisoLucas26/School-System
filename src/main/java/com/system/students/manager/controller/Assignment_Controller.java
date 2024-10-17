@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.system.students.manager.Assigment_Services.Assigment_services;
-import com.system.students.manager.model.StudentAssignment;
+import com.system.students.manager.model.Assignment;
 
 @Controller
 public class Assignment_Controller {
@@ -31,46 +31,45 @@ public class Assignment_Controller {
     // checked
     @GetMapping("assignments/new")
     public String showCreateForm(Model model) {
-        model.addAttribute("assignment", new StudentAssignment());
+        model.addAttribute("assignment", new Assignment());
         return "assignment_create";
     }
 
     // checked
     @GetMapping("/assignments/edit/{id}")
     public String updatePage(@PathVariable Long id, Model model) {
-        Optional<StudentAssignment> assignment = assigment_services.getAssignById(id);
+        Optional<Assignment> assignment = assigment_services.findById(id);
         model.addAttribute("assignment", assignment);
-        return "assignment_create";
+        return "assignment_edit";
     }
 
     // checked
-    @PostMapping("/assigments/edit/{id}")
-    public String updateAssignment(@PathVariable Long id,
-            @ModelAttribute("assigment") StudentAssignment assignment) {
-        assignment.setId(id);
-        assigment_services.saveAssignment(assignment);
-        return "redirect:/assignments";
+    @PostMapping("/assigments/update")
+    public String updateAssignment(@ModelAttribute Assignment assignment) {
+        assigment_services.update(assignment);
+        return "redirect:/user/dashboard";
     }
 
     // checked
     @GetMapping("/assignments/delete/{id}")
     public String deleteAssignment(@PathVariable Long id) {
-        assigment_services.deleteAssignment(id);
+        assigment_services.deleteAssign(id);
         return "redirect:/user/dashboard";
     }
 
     // checked
-    @PostMapping("/assignments/post")
-    public String createAssignment(@ModelAttribute StudentAssignment assignment) {
+    @PostMapping("/assignments/save")
+    public String createAssignment(@ModelAttribute Assignment assignment) {
         assigment_services.saveAssignment(assignment);
         return "redirect:/user/dashboard";
     }
 
     /////////////////////////////////////////////
     @GetMapping("/assignment/{id}")
-    public ResponseEntity<StudentAssignment> getAssignmentById(@PathVariable Long id) {
-        Optional<StudentAssignment> assignment = assigment_services.getAssignById(id);
-        return assignment.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Assignment> getAssignmentById(@PathVariable Long id) {
+        Optional<Assignment> assignment = assigment_services.findById(id);
+        return assignment
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
 }

@@ -1,16 +1,10 @@
 package com.system.students.manager.model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -63,35 +57,8 @@ public class Students_Model {
 
   /////////////////////////////////////
 
-  @ManyToOne
-  @JoinColumn(name = "class_id")
-  private Class clazz;
-
-  @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-  private List<StudentAssignment> studentAssignments;
-
-  @OneToMany(mappedBy = "student")
-  private List<AssignmentSubmission> submissions;
-
   @Column(name = "subjects")
   private String subjects;
-
-  public Students_Model(long id, String firstName, String lastName, String surname, String date_of_birth,
-      String gender, String address, String id_number, String email, String parent_name, String parent_contact,
-      String subjects) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.surname = surname;
-    this.date_of_birth = date_of_birth;
-    this.gender = gender;
-    this.address = address;
-    this.id_number = id_number;
-    this.email = email;
-    this.parent_name = parent_name;
-    this.parent_contact = parent_contact;
-    this.subjects = subjects;
-  }
 
   public long getId() {
     return id;
@@ -181,30 +148,6 @@ public class Students_Model {
     this.parent_contact = parent_contact;
   }
 
-  public Class getClazz() {
-    return clazz;
-  }
-
-  public void setClazz(Class clazz) {
-    this.clazz = clazz;
-  }
-
-  public List<StudentAssignment> getStudentAssignments() {
-    return studentAssignments;
-  }
-
-  public void setStudentAssignments(List<StudentAssignment> studentAssignments) {
-    this.studentAssignments = studentAssignments;
-  }
-
-  public List<AssignmentSubmission> getSubmissions() {
-    return submissions;
-  }
-
-  public void setSubmissions(List<AssignmentSubmission> submissions) {
-    this.submissions = submissions;
-  }
-
   public String getSubjects() {
     return subjects;
   }
@@ -212,7 +155,5 @@ public class Students_Model {
   public void setSubjects(String subjects) {
     this.subjects = subjects;
   }
-
-
 
 }

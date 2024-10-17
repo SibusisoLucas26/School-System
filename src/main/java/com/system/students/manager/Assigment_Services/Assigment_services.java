@@ -1,59 +1,71 @@
 package com.system.students.manager.Assigment_Services;
 
-
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.system.students.manager.model.StudentAssignment;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.system.students.manager.model.Assignment;
 import com.system.students.manager.repository.Assignment_repo;
 
+import jakarta.annotation.PostConstruct;
+
 @Service
-public class Assigment_services {
+public class Assigment_services implements Inter_Assignments {
 
     @Autowired
     private Assignment_repo assigmeent_repo;
 
-    public List<com.system.students.manager.model.StudentAssignment> getAllAssignments(){
-        return assigmeent_repo.findAll();
-    } 
-
-    public Optional<com.system.students.manager.model.StudentAssignment> getAssignById(Long id){
-        return assigmeent_repo.findById(id);
-    }
-
-    public StudentAssignment saveAssignment(StudentAssignment assignment){
-        return assigmeent_repo.save(assignment);
-    }
-
-    public void deleteAssignment(Long id) {
-        assigmeent_repo.deleteById(id);
-    }
-
-    public List<StudentAssignment> getAssignmentsByStudentId(Long studentId) {
-      return assigmeent_repo.findByStudentId(studentId);
-      
-    }
-
-    public List<StudentAssignment> getAssignmentsByTeacherId(Long teacherId) {
-        return assigmeent_repo.findByTeacherId(teacherId);
-    }
-
-    public void updateAssignment(Long id, StudentAssignment updatedAssignment) {
-        StudentAssignment existingAssignment =assigmeent_repo.findById(id).orElse(null);
-        if (existingAssignment != null) {
-            existingAssignment.setTitle(updatedAssignment.getTitle());
-            existingAssignment.setDescription(updatedAssignment.getDescription());
-            existingAssignment.setDueDate(updatedAssignment.getDueDate());
+    @Override
+    public void update(Assignment assignment) {
+        Optional<Assignment> assigOptional = assigmeent_repo.findById(
+                assignment.getId());
+        if (assigOptional.isPresent()) {
+            assignment.setTitle(assignment.getTitle());
+            assignment.setDescription(assignment.getDescription());
+            assignment.setDueDate(assignment.getDueDate());
             // Update other fields as necessary
-            assigmeent_repo.save(existingAssignment);
+            assigmeent_repo.save(assignment);
         }
     }
 
-   // public List<StudentAssignment> getAssignmentsBySubjectId(Long subjectId) {
-     //   return assigmeent_repo.findBySubjectId(subjectId);
-   // }
-
+    @Override
+    public Assignment saveAssignment(Assignment assignment) {
+        return assigmeent_repo.save(assignment);
     }
+
+    @Override
+    public Optional<Assignment> findById(Long id) {
+        return assigmeent_repo.findById(id);
+    }
+
+    @Override
+    public List<Assignment> getAllAssign() {
+        return assigmeent_repo.findAll();
+    }
+
+    @Override
+    public void deleteAssign(Long id) {
+        assigmeent_repo.deleteById(id);
+    }
+
+    @PostConstruct
+    public void loadAssignmentsFromJson() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        TypeReference<List<Assignment>> typeReference = new TypeReference<List<Assignment>>() {
+        };
+        InputStream inputStream = TypeReference.class.getResourceAsStream("/data/assignments.json");
+
+        try {
+            List<Assignment> assignments = objectMapper.readValue(inputStream, typeReference);
+            assigmeent_repo.saveAll(assignments); // Save to the database
+            System.out.println("Assignments saved to the database.");
+        } catch (Exception e) {
+            System.out.println("Unable to save assignments: " + e.getMessage());
+        }
+    }
+}

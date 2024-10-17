@@ -1,4 +1,4 @@
-package com.system.students.manager.teacher_services;
+package com.system.students.manager.user_services;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,23 +9,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.system.students.manager.model.Teacher_model;
-import com.system.students.manager.repository.Class_repo;
-import com.system.students.manager.repository.Teacher_repo;
+import com.system.students.manager.model.User_Model;
+import com.system.students.manager.repository.User_repo;
 
 @Service
-public class Teacher_impl_service implements Teacher_services {
-
-    @Autowired
-    private Class_repo class_repo;
-
-    public List<com.system.students.manager.model.Class> findClassesByTeacherId(Long teacherId) {
-        return class_repo.findByTeacherId(teacherId);
-    }
+public class User_Service implements User_Interface {
 
     ////////////////////////////////////////////
     @Autowired
-    private Teacher_repo teacher_repo;
+    private User_repo user_repo;
 
     /////////////////////////////////////////////////////////////
 
@@ -35,16 +27,16 @@ public class Teacher_impl_service implements Teacher_services {
     @Transactional
     public void createUser(String firstname, String lastname, String surname, String username, String password,
             Set<String> roles) {
-        Teacher_model teacher_model = new Teacher_model(firstname, lastname, surname, username,
+        User_Model teacher_model = new User_Model(firstname, lastname, surname, username,
                 passwordEncoder.encode(password), roles);
-        teacher_repo.save(teacher_model);
+        user_repo.save(teacher_model);
     }
     //////////////////////////////////////////////////
 
     @Override
-    public List<Teacher_model> getAllTeachers() {
+    public List<User_Model> getAllTeachers() {
         // TODO Auto-generated method stub
-        return teacher_repo.findAll();
+        return user_repo.findAll();
         // throw new UnsupportedOperationException("Unimplemented method
         // 'getAllTeachers'");
     }
@@ -52,15 +44,15 @@ public class Teacher_impl_service implements Teacher_services {
     @Override
     public void delete_teacher(Long id) {
         // TODO Auto-generated method stub
-        teacher_repo.deleteById(id);
+        user_repo.deleteById(id);
         // System.out.println();
         // throw new UnsupportedOperationException("Unimplemented method
         // 'delete_teacher'");
     }
 
     @Override
-    public Teacher_model findByUsername(String username) {
-        return teacher_repo.findByUsername(username);
+    public User_Model findByUsername(String username) {
+        return user_repo.findByUsername(username);
     }
 
     /////////////////// security implimentstion
@@ -82,12 +74,12 @@ public class Teacher_impl_service implements Teacher_services {
     //////////////////////////////////
 
     @Override
-    public Teacher_model update_teacher(Teacher_model teacher_model) {
+    public User_Model update_teacher(User_Model teacher_model) {
         // TODO Auto-generated method stub
-        Optional<Teacher_model> teacher_Optional = teacher_repo.findById(teacher_model.getId());
+        Optional<User_Model> teacher_Optional = user_repo.findById(teacher_model.getId());
 
         if (teacher_Optional.isPresent()) {
-            Teacher_model teacher = teacher_Optional.get();
+            User_Model teacher = teacher_Optional.get();
             teacher.setId(teacher_model.getId());
 
             teacher.setUsername(teacher_model.getUsername());
@@ -95,32 +87,32 @@ public class Teacher_impl_service implements Teacher_services {
 
             // teacher.setPhone(teacher_model.getPhone());
 
-            return teacher_repo.save(teacher_model);
+            return user_repo.save(teacher_model);
         } else {
             throw new IllegalArgumentException("teacher not found");
         }
     }
 
     @Override
-    public Optional<Teacher_model> get_byId(Long id) {
+    public Optional<User_Model> get_byId(Long id) {
         // TODO Auto-generated method stub
-        return teacher_repo.findById(id);
+        return user_repo.findById(id);
         // throw new UnsupportedOperationException("Unimplemented method 'get_byId'");
     }
 
     @Override
-    public Optional<Teacher_model> findByTeacherId(Long id) {
+    public Optional<User_Model> findByTeacherId(Long id) {
         // TODO Auto-generated method stub
-        return teacher_repo.findById(id);
+        return user_repo.findById(id);
         // throw new UnsupportedOperationException("Unimplemented method
         // 'findByTeacherId'");
     }
 
     @Override
-    public Teacher_model save(Teacher_model teacher_model) {
+    public User_Model save(User_Model teacher_model) {
         // TODO Auto-generated method stub
-        return teacher_repo.save(teacher_model);
-       // throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return user_repo.save(teacher_model);
+        // throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
 }

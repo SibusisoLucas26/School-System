@@ -1,0 +1,21 @@
+/* src/styles.css */
+
+/* Ensure the main content shifts right to accommodate the sidebar */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .login-container, .form-container {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  .dashboard-container {
+    padding: 20px;
+  }
+  

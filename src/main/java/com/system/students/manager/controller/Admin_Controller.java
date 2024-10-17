@@ -11,21 +11,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.system.students.manager.model.Students_Model;
-import com.system.students.manager.model.Teacher_model;
+import com.system.students.manager.model.User_Model;
 import com.system.students.manager.student_services.Student_service;
-import com.system.students.manager.teacher_services.Teacher_services;
+import com.system.students.manager.user_services.User_Interface;
 
 @Controller
-// @RequestMapping("/admin")
+ @RequestMapping("/admin")
 public class Admin_Controller {
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private Teacher_services teacher_services;
+    private User_Interface teacher_services;
 
     @Autowired
     private Student_service student_service;
@@ -33,7 +34,7 @@ public class Admin_Controller {
     ////////////////// admin students CRUD controllers ///////////////////////
 
     // checkd
-    @GetMapping("/admin/students/page")
+    @GetMapping("/students/page")
     public String listStudents(Model model) {
         List<Students_Model> students = student_service.getAllStudents();
         model.addAttribute("students", students);
@@ -42,7 +43,7 @@ public class Admin_Controller {
 
     /////////////////////////////////////////////////////// update student
     /////////////////////////////////////////////////////// controlers
-    @GetMapping("/admin/students/edit/{id}")
+    @GetMapping("/students/edit/{id}")
     public String edit_Profile(@PathVariable Long id, Model model) {
         Optional<Students_Model> students_Model = student_service.find_by_id(id);
         if (students_Model.isPresent()) {
@@ -54,7 +55,7 @@ public class Admin_Controller {
 
     }
 
-    @PostMapping("/admin/students/edit")
+    @PostMapping("/students/edit")
     public String update_students(@ModelAttribute("students") Students_Model students_Model) {
         Optional<Students_Model> exStudent_model = student_service.find_by_id(students_Model.getId());
         if (exStudent_model.isPresent()) {
@@ -79,15 +80,15 @@ public class Admin_Controller {
     //////////////////////////// Teachers
     //////////////////////////// CRUD/////////////////////////////////////////////////
     // checked
-    @GetMapping("/admin/teachers/page")
+    @GetMapping("/teachers/page")
     public String getAllTeachers(Model model) {
-        List<Teacher_model> teachers = teacher_services.getAllTeachers();
+        List<User_Model> teachers = teacher_services.getAllTeachers();
         model.addAttribute("teachers", teachers);
         return "teacher_page_list";
     }
 
     // checked
-    @PostMapping("/admin/students/reg")
+    @PostMapping("/students/reg")
     public String registerStudent(@ModelAttribute("students") Students_Model students) {
         student_service.save_student(students);
         // Logic to save the student
@@ -102,7 +103,7 @@ public class Admin_Controller {
     }
 
     // checked
-    @GetMapping("/admin/students/new")
+    @GetMapping("/students/new")
     public String new_student(Model model) {
         model.addAttribute("students", new Students_Model());
         // stu_service.save_student(student_model);
@@ -110,18 +111,19 @@ public class Admin_Controller {
     }
 
     ///////////////// admin teachers CRUD controllers ////////////////////////
-      // checked
+    // checked
     @PostMapping("/teachers/reg")
-    public String saveTeacher(@ModelAttribute("teachers") Teacher_model teacher, Model model) {
+    public String saveTeacher(@ModelAttribute("teachers") User_Model teacher, Model model) {
         teacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
-      //  teacher_repo.save(teacher);
-      teacher_services.save(teacher);
+        // teacher_repo.save(teacher);
+        teacher_services.save(teacher);
         return "redirect:/admin/teachers/page";
     }
+
     // checked
-    @GetMapping("/admin/teachers/edit/{id}")
+    @GetMapping("/teachers/edit/{id}")
     public String editProfile(Model model, @PathVariable Long id) {
-        Optional<Teacher_model> teacher = teacher_services.get_byId(id);
+        Optional<User_Model> teacher = teacher_services.get_byId(id);
         if (teacher.isPresent()) {
             model.addAttribute("teachers", teacher.get());
         } else {
@@ -132,14 +134,14 @@ public class Admin_Controller {
     }
 
     // checked
-    @PostMapping("/admin/teachers/edit")
-    public String updateTeacher(@ModelAttribute("teacher") Teacher_model teacher) {
+    @PostMapping("/teachers/edit")
+    public String updateTeacher(@ModelAttribute("teacher") User_Model teacher) {
         teacher_services.update_teacher(teacher);
         return "redirect:/admin/teachers/page";
     }
 
     // checked
-    @GetMapping("/admin/teachers/delete/{id}")
+    @GetMapping("/teachers/delete/{id}")
     public String deleteTeacher(@PathVariable Long id) {
         teacher_services.delete_teacher(id);
         return "redirect:/admin/teachers/page";
